@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add workout</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Add workout</h1>
+	<div>
+		<form th:object="${workout}" th:action="@{save}" action="#" method="post">
+		  	<label for="exercise">Exercise</label>
+			<input type="text" id="exercise" th:field="*{exercise}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="weight">Weight</label>
+			<input type="text" id="weight" th:field="*{weight}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="musclelist">Muscle</label>
+			<select id="musclelist" th:field="*{muscle}" class="form-control">
+				<option th:each="muscle : ${muscles}" th:value = "${muscle.muscleid}" th:text="${muscle.name}"></option>
+			</select>		
+				
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="goalReps">Goal reps</label>
+			<input type="text" id="goalReps" th:field="*{goalReps}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="reps">Reps</label>
+			<input type="text" id="reps" th:field="*{reps}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="rpe">RPE</label>
+			<input type="text" id="rpe" th:field="*{rpe}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="restTime">Rest(s)</label>
+			<input type="text" id="restTime" th:field="*{restTime}" />
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label sec:authorize="hasAuthority('COACH')" for="burnedCalo">Burned Calories</label>
+			<input sec:authorize="hasAuthority('COACH')" type="text" id="burnedCalo" th:field="*{burnedCalo}" /> <br/> <br/>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input class="btn btn-success" type="submit" value="Save workout"></input>
+		</form>
+	</div>
+</body>
+</html>

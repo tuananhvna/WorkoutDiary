@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Workout diary</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+	<div class="col-md-4" style="padding:20px 0">
+     	<form th:action="@{/logout}" method="post" name="_csrf" value="d63f746f-c5f6-4cc6-99c0-9220ff784b23"/>  
+ 	 		<input type="submit" value="Sign Out"/>
+ 	 	</form>
+ 	 </div>
+ 	 
+	<div class="col-md-4">
+	<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]! </h3>
+	</div>
+	
+	<div class="col-md-4">
+		<h1>Workout diary</h1>
+	</div>
+	
+    <table  class="table table-striped">
+		<tr>
+		    <th>Exercise</th>
+		    <th>Weight(kg)</th>
+		    <th>Muscle</th>
+		    <th>Goal Reps</th>
+		    <th>Reps</th>
+		    <th>RPE</th>
+		    <th>Rest(s)</th>
+		    <th>Burned Calories*</th>
+		</tr> 
+		<tbody>
+		    <tr th:each = "workout : ${workouts}">
+		    	<td th:text="${workout.exercise}"></td>
+		    	<td th:text="${workout.weight}"></td>
+		    	<td th:text="${workout.muscle.name}"></td>
+		    	<td th:text="${workout.goalReps}"></td>
+		    	<td th:text="${workout.reps}"></td>
+		    	<td th:text="${workout.rpe}"></td>
+		    	<td th:text="${workout.restTime}"></td>
+		    	<td th:text="${workout.burnedCalo}"></td>
+		    		<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${workout.id})}">Delete</a></td>
+		    		<td><a th:href="@{/edit/{id}(id=${workout.id})}">Edit</a></td>
+		    </tr>
+		</tbody> 
+     </table>
+     
+     <p sec:authorize="hasAuthority('CLIENT')">*Burned calories is 0 until your coach calculates and fills in the table</p>
+     
+     <a class="btn btn-success" href="/add">Add Workout</a>
+</div>
+</body>
+</html>
