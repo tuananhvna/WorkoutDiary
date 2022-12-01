@@ -1,7 +1,7 @@
 # WorkoutDiary
 Server programming final project
 
-Main functionalites: H2 database connection, CRUD, RESTful services, Spring security, some test cases
+Main functionalites: H2 database connection, CRUD, RESTful services, Spring DATA REST, Spring security, some test cases
 
 This is a simple workout diary for clients and coaches to store information of exercises.
 There are 2 roles (2 username/password): client/user   coach/admin
